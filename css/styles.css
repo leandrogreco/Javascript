@@ -1,0 +1,116 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body, body main {
+  display: flex; }
+
+  /* .color1 { #5c64a0 };
+  .color2 { #747cb8 };
+  .color3 { #8d93d0 };
+  .color4 { #a5abe7 };
+  .color5 { #bdc2ff }; */
+
+/*letras del header*/
+
+body {
+  /*para el footer fijo*/
+  flex-direction: column;
+  min-height: 100vh; }
+  body header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #bdc2ff;
+    /*para que se aleje del lateral*/
+    padding: 0 30px;
+    /*para que la barra quede fija*/
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%; }
+    body header div {
+    }
+    body header h1 {
+      margin-top: 8px;
+      color: #273e8b;
+      width: 900px;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      text-shadow: 3px 7px 10px #ffffff;
+      font-size: 2rem; }
+  body main {
+    display: block;
+    flex-wrap: wrap;
+    margin: 50px;
+    padding-top: 50px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+    body main form {}
+      body main form table {}
+        body main form table tr {}
+          body main form table tr td {
+              padding-top: 0.8rem;
+              padding-right: 1rem;
+              font-family: Verdana, Geneva, Tahoma, sans-serif;
+              color: #273e8b;
+              font-size: 0.8rem;
+              font-weight: bold;
+          }
+  body footer {
+    /*para el footer fijo*/
+    margin-top: auto; }
+    body footer h2 {
+      display: flex;
+      padding: 15px;
+      background-color: #bdc2ff;
+      text-align: center;
+      Justify-content: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      font-style: italic;
+      color: #273e8b;
+      font-size: 8px; }
+
+.tablaEncabezado{
+  background-color: #020527;
+  text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.tablaIngreso{
+  background-color: #ffffff;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #000000;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+.totales{
+  background-color: #007a10;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: bold;
+}
+.totalTexto{
+  background-color: #007a10;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: bold;
+}
+.swal2-title{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #f30202;
+  font-size: 1em !important;
+}
+.boton{
+  font-size: 12px;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+}

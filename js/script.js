@@ -1,190 +1,209 @@
-const IVA1=1.21
-const IVA2=1.105
+const IVA=1.21
 let total = 0
 let tipoProducto=""
+let lsLargo = 0;
+let controlrz = 0;
+let controlap = 0;
+let controln = 0;
+let controle = 0;
+let controlfinalizar = true;
 
 class Producto {
-    constructor(modelo,soporte,costoModelo,costoSoporte) {
-        this.modelo = modelo.toUpperCase();
-        this.soporte  = soporte.toUpperCase();
-        this.costoModelo= parseFloat(costoModelo);
-        this.costoSoporte= parseFloat(costoSoporte);
+    constructor(skuItem,skuCosto,skuDescripcion) {
+        this.skuItem = skuItem.toUpperCase();
+        this.skuCosto= parseFloat(skuCosto);
+        this.skuDescripcion= (skuDescripcion);
     }
 }
 //Declaramos un array de productos para almacenar objetos
 const productos = [];
-productos.push(new Producto("FG-40F", "FC-10-0040F-950-02-12","633","443"));
-productos.push(new Producto("FG-60F", "FC-10-0060F-950-02-12","888","621"));
-productos.push(new Producto("FG-100F", "FC-10-F100F-950-02-12","3568","2497"));
+productos.push(new Producto("FG-40F","633","Fortigate 40F"));
+productos.push(new Producto("FG-60F","888","Fortigate 60F"));
+productos.push(new Producto("FG-100F","3568","Fortigate 100F"));
+productos.push(new Producto("FC-10-0040F-950-02-12","443","Soporte UTP para Fortigate 40F"));
+productos.push(new Producto("FC-10-0060F-950-02-12","621","Soporte UTP para Fortigate 60F"));
+productos.push(new Producto("FC-10-F100F-950-02-12","2497","Soporte UTP para Fortigate 100F"));
 
-console.log(productos);
+let razonSocial = document.getElementById("formRazonSocial");
+let apellido = document.getElementById("formApellido");
+let nombre = document.getElementById("formNombre");
+let email = document.getElementById("formEmail");
+let sku = document.getElementById("formSku");
+let cantidad = document.getElementById("formCantidad");
 
-do {
-    menuUno = prompt("MENU DE COTIZACION\n\n1- HARDWARE\n2- SOFTWARE\n3- MODIFICAR COSTO\n4- SALIR\n\n")
-    switch(menuUno) {
-        case "1":
-            tipoProducto="HARDWARE"
-            do {
-                menuDos = prompt("MENU DE COTIZACION\n\n1- "+ productos[0].modelo+"\n2- "+ productos[1].modelo+"\n3- "+ productos[2].modelo+"\n4- SALIR\n\n")                
-                switch(menuDos) {
-                    case "1":
-                        infofinal = productos[0];
-                        mostrar()
-                        break;
-                    case "2":
-                        infofinal = productos[1];
-                        mostrar()
-                        break;
-                    case "3":
-                        infofinal = productos[2];
-                        mostrar()
-                        break;
-                    case "4":
-                        infofinal =""
-                        break;
-                    default:
-                        alert ("Ingrese una opcion valida del MENU");
-                }
-            } while (menuDos!="4");
-            break;
+//JSON Queres cotizar con los datos del ultimo que cotizo?
+if (localStorage.getItem('datoscliente')){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: 'btn btn-success',
+            cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: true
+    })
 
-        case "2":
-            tipoProducto="SOFTWARE"
-            do {
-                menuTres = prompt("MENU DE COTIZACION\n\n1- "+ productos[0].soporte+"\n2- "+ productos[1].soporte+"\n3- "+ productos[2].soporte+"\n4- SALIR\n\n")                
-                switch(menuTres) {
-                    case "1":
-                        infofinal = productos[0];
-                        mostrar()
-                        break;
-                    case "2":
-                        infofinal = productos[1];
-                        mostrar()
-                        break;
-                    case "3":
-                        infofinal = productos[2];
-                        mostrar()
-                        break;
-                    case "4":
-                        //infofinal =""
-                        break;
-                    default:
-                        alert ("Ingrese una opcion valida del MENU");
-                }
-            } while (menuTres!="4");
-            break;
-
-        case "3":
-            do {
-                menuCuatro = prompt("MENU DE MODIFICACION\n\n1- "+ productos[0].modelo+"\n2- "+ productos[1].modelo+"\n3- "+ productos[2].modelo+"\n4- "+ productos[0].soporte+"\n5- "+ productos[1].soporte+"\n6- "+ productos[2].soporte+"\n7- SALIR\n\n") 
-                switch(menuCuatro) {
-                    case "1":
-                        tipoProducto="HARDWARE"
-                        modifico = productos[0].modelo;
-                        modificar(modifico)
-                        break;
-                    case "2":
-                        tipoProducto="HARDWARE"
-                        modifico = productos[1].modelo;
-                        modificar(modifico)
-                        break;
-                    case "3":
-                        tipoProducto="HARDWARE"
-                        modifico = productos[2].modelo;
-                        modificar(modifico)
-                        break;
-                    case "4":
-                        tipoProducto="SOFTWARE"
-                        modifico = productos[0].soporte;
-                        modificar(modifico)
-                        break;
-                    case "5":
-                        tipoProducto="SOFTWARE"
-                        modifico = productos[1].soporte;
-                        modificar(modifico)
-                        break;
-                    case "6":
-                        tipoProducto="SOFTWARE"
-                        modifico = productos[2].soporte;
-                        modificar(modifico)
-                        break;                    
-                    case "7":
-                        //modificar =""
-                        break;
-                    default:
-                        alert ("Ingrese una opcion valida del MENU");
-                }
-            } while (menuCuatro!="7");
-
-            break;
-        case "4":
-            //alert ("SALIDA");
-            break;
-
-        default:
-            alert ("Ingrese una opcion valida del MENU");
+        swalWithBootstrapButtons
+        .fire({
+            title: 'Datos de usuario almacenados',
+            text: "¿Desea cotizar con los mismos datos de la ultima cotizacion?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, por favor!',
+            cancelButtonText: 'No, gracias!',
+            reverseButtons: true
+        })
+        .then((result) => {
+            if (result.isConfirmed) {
+                swalWithBootstrapButtons.fire(
+                    'Excelente!',
+                    'Ya puede cotizar con esos datos de usuario',
+                    'success'
+                )
+                let usuario = JSON.parse(localStorage.getItem("datoscliente"));
+                document.getElementById("formRazonSocial").value = usuario.rSocial;
+                document.getElementById("formApellido").value = usuario.apellido;
+                document.getElementById("formNombre").value = usuario.nombre;
+                document.getElementById("formEmail").value = usuario.email;
+                controlrz=1;
+                controlap=1;
+                controln=1;
+                controle=1;
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Excelente',
+                    'Ya puede continuar ingresando nuevos datos',
+                    'success'
+                )
+                localStorage.removeItem('datoscliente');
+            }
+        })
     }
-} while (menuUno !="4");
 
-
-function modificar(modifico) {
-    nuevoCosto = prompt("INGRESE NUEVO COSTO\n\n")
-    while(esNumero(nuevoCosto)){
-        nuevoCosto = prompt("Por favor, ingrese costo VALIDO!")
-    }
-    if (tipoProducto=="HARDWARE") {
-        const o = productos.find(elemento => 
-            elemento.modelo === modifico); 
-            o.costoModelo=Number(nuevoCosto);
-            console.log(productos);
+//Control de campos de ingreso
+document.getElementById("formRazonSocial").onchange = function() {myFunctionRazon()};
+function myFunctionRazon() {
+    if (razonSocial.value == null || razonSocial.value.length == 0 || /^\s+$/.test(razonSocial.value)){
+        Swal.fire('Ingrese una RAZON SOCIAL valida');
+        razonSocial.value=""
+        controlrz=0;
     }
     else {
-        const o = productos.find(elemento => 
-            elemento.soporte === modifico); 
-            o.costoSoporte=Number(nuevoCosto);
-            console.log(productos);
+        controlrz=1;
+    }
+}
+document.getElementById("formApellido").onchange = function() {myFunctionApellido()};
+function myFunctionApellido() {
+    if (apellido.value == null || apellido.value.length == 0 || /^\s+$/.test(apellido.value)){
+        Swal.fire('Ingrese una APELLIDO valido');
+        apellido.value=""
+        controlap=0;
+    }
+    else {
+        controlap=1;
+    }
+}
+document.getElementById("formNombre").onchange = function() {myFunctionNombre()};
+function myFunctionNombre() {
+    if (nombre.value == null || nombre.value.length == 0 || /^\s+$/.test(nombre.value)){
+        Swal.fire('Ingrese una NOMBRE valido');
+        nombre.value=""
+        controln=0;
+    }
+    else {
+        controln=1;
+    }
+}
+document.getElementById("formEmail").onchange = function() {myFunctionEmail()};
+function myFunctionEmail() {
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formEmail.value)){
+        controle=1;
+    }
+    else {
+        Swal.fire('Ingrese una EMAIL Valido');
+        email.value=""
+        controle=0;
     }
 }
 
-function mostrar() {
-    if (tipoProducto =="HARDWARE") {
-        let valorVenta = (infofinal.costoModelo / 0.8);
-        let valorVentaIVA=0;
-        valorVentaIVA=(valorVenta*IVA1);
-        alert ("El tipo de producto: " + tipoProducto + "\n" +
-        "El producto ingresado: "+ infofinal.modelo + "\n" +
-        "El costo ingresado: " + infofinal.costoModelo + "\n" +
-        "El valor de venta: " + valorVenta + "\n" +
-        "El valor + IVA: " + valorVentaIVA + "\n")
+//Eventos del boton agregar
+function botonAgregar () {
+    if (cantidad.value<1){
+        Swal.fire('Ingrese una CANTIDAD Valida');
+        return; 
+}
+    if (controlrz==0 || controlap==0 || controln==0 || controle==0 || sku.value == "-- Seleccionar --"){
+        Swal.fire('Complete todos los datos');
+        return;
     }
-    else
-    {
-        let valorVenta = (infofinal.costoSoporte / 0.8);
-        let valorVentaIVA=0;
-        valorVentaIVA=(valorVenta*IVA2);
-        alert ("El tipo de producto: " + tipoProducto + "\n" +
-        "El producto ingresado: "+ infofinal.soporte + "\n" +
-        "El costo ingresado: " + infofinal.costoSoporte + "\n" +
-        "El valor de venta: " + valorVenta + "\n" +
-        "El valor + IVA: " + valorVentaIVA + "\n")
+
+    let usuario = {rSocial:razonSocial.value, apellido:apellido.value, nombre:nombre.value , email:email.value};
+    const enJSON = JSON.stringify(usuario);
+    localStorage.setItem("datoscliente", enJSON);
+
+    function buscosku(elemento) {
+        return elemento.skuItem === sku.value;
+    }
+
+    temporal=productos.find(buscosku);
+    //console.log(temporal);
+    let datos = document.getElementById("tablaIngreso");
+    let subtotal = Number (cantidad.value) * Number (temporal.skuCosto);
+    datos.innerHTML = datos.innerHTML + "<tr>" +
+                                            "<td>"+temporal.skuItem+"</td>"+
+                                            "<td>"+cantidad.value+"</td>"+
+                                            "<td>"+temporal.skuDescripcion+"</td>"+
+                                            "<td>"+temporal.skuCosto+"</td>"+
+                                            "<td name='subtotal'>"+subtotal+"</td>"+
+                                            "<td> <button onclick='eliminar(this)'>Eliminar</button></td>"+
+                                            "</tr>";
+    calcularTotal();
+}
+
+function botonFinalizar () {
+    if (controlfinalizar){        
+        Swal.fire('Ingrese algun producto a la cotizacion antes de enviar');
+        return;
+    }
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Cotizacion enviada',
+        showConfirmButton: false,
+        timer: 1500
+    })
+    setTimeout (callback, 2000);
+    function callback ( ) {
+        document.location.reload(true);
     }
 }
 
-function esNumero(costo) {
-    if (isNaN(costo)) {
-        //alert ("NO soy un numero");
-        return true
+//funcion para eliminar una linea con el boton
+function eliminar(linea) {
+    //console.log(linea.parentElement.parentElement);
+    linea.parentElement.parentElement.remove();
+    calcularTotal();
+}
+
+//funcion para de calcular totales
+function calcularTotal() {
+    let subtotales = document.getElementsByName("subtotal");
+    let total = document.getElementById("tablaTotalsinIVA");
+    let totalConIVA = document.getElementById("tablaTotalconIVA");
+
+    let suma = 0;
+
+    for (let i = 0; i < subtotales.length; i++) {
+        suma = suma  + Number(subtotales[i].innerText);
     }
-    else
-    {
-        if (costo =="") {
-            //alert ("NO soy un numero");
-            return true
-        }
-        else
-        {
-            //alert ("Soy un numero");
-            return false
-        }
+    total.innerText = "$ " + suma.toFixed(2);
+    let masIva = suma*1.21;
+    totalConIVA.innerText = "$ " + masIva.toFixed(2);
+
+    if (suma>0){        
+        controlfinalizar = false;}
+    else {
+        controlfinalizar = true;
     }
 }

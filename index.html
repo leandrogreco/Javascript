@@ -1,13 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso JavaScript</title>
-    <script src="js/script.js"></script>
-</head>
-<body>
-    <h1>Pre-entrega N°2 - CODERHOUSE</h1>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!--description y keyword-->
+        <meta
+            name="”description”"
+            content="Utiliza el cotizador de Fortinet desarrollado por Adistec para poder obtener online, rapido y facilmente l cotizacion que necesitas">
+        <meta name="”keywords”" content="Cotizador Fortinet Adistec">
+        <!--link de mi css-->
+        <link rel="stylesheet" href="./css/styles.css">
+        <!--link de fonts del Header-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossorigin="crossorigin">
+        <link>
+        <script src=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.all.min.js "></script>
+        <link href=" https://cdn.jsdelivr.net/npm/sweetalert2@11.7.1/dist/sweetalert2.min.css " rel="stylesheet">
+        <title>
+            Cotizador Fortinet
+        </title>
+    </head>
+    <body>
+        <!--encabezado-->
+        <header>
+            <div>
+                <img src="./img/adistec.png" width="120" alt="Logo Adistec">
+            </div>
+            <h1>Cotizador Fortinet</h1>
+        </header>
+        <!--contenido del main-->
+        <main>
+            <form class="">
+                <table>
+                    <tr>
+                        <td>
+                            <label for="">Razon Social</label>
+                        </td>
+                        <td><input id="formRazonSocial" name="formRazonSocial" type="text" size="85" placeholder=" ej: Equanet S.A."></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="">Apellido y Nombre</label>
+                        </td>
+                        <td><input id="formApellido" name="formApellido" type="text" size="40" placeholder=" Apellido">
+                            <input id="formNombre" name="formNombre"type="text" size="40" placeholder=" Nombre"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="">Email</label>
+                        </td>
+                        <td><input id="formEmail" name="formEmail" type="text" size="40" placeholder=" apellidonombre@domain.com">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="">¿Que producto desea cotizar?</label>
+                        </td>
+                        <td>
+                            <select id="formSku" name="formSku">
+                                <option disabled="disabled" selected="selected">-- Seleccionar --</option>
+                                <option>FG-40F
+                                <option>FG-60F
+                                <option>FG-100F
+                                <option>FC-10-0040F-950-02-12
+                                <option>FC-10-0060F-950-02-12
+                                <option>FC-10-F100F-950-02-12
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="">Cantidad</label>
+                        </td>
+                        <td><input id="formCantidad" name="formCantidad" type="number" size="5" value="1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class=boton type="button" onclick="botonAgregar()">Agregar Producto</button>
+                        </td>
+                        <td>
+                            <button class=boton type="button" onclick="botonFinalizar()">Enviar</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br>
+                <table border="1">
+                    <thead class=tablaEncabezado>
+                        <tr>
+                            <th width="250">SKU</th>
+                            <th width="80">Cantidad</th>
+                            <th width="350">Descripcion</th>
+                            <th width="140">Precio Unitario ($)</th>
+                            <th width="120">Total ($)</th>
+                            <th width="250">-</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaIngreso" class="tablaIngreso">
+                        
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th class= totalTexto colspan="5">Total sin IVA</th>
+                            <th class=totales id="tablaTotalsinIVA">$</th>
+                        </tr>
+                        <tr>
+                            <th class= totalTexto colspan="5">Total + IVA</th>
+                            <th class=totales id="tablaTotalconIVA">$</th>
+                        </tr>
+                    </tfoot>
+                </table>
+        </main>
+        <!--contenido del footer-->
+        <footer>
+        <h2>Copyright © 2023 LGRECO - All rights Reserved - This product is protected by
+            copyright and distributed under licenses restricting copying, distribution, and
+            decompilation.</h2>
+        </footer>
+    </body>
+        <script src="js/script.js"></script>
 </html>
