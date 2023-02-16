@@ -31,6 +31,18 @@ let email = document.getElementById("formEmail");
 let sku = document.getElementById("formSku");
 let cantidad = document.getElementById("formCantidad");
 
+//fetch con ruta relativa
+const getDatos = async () => {
+    const resp = await fetch("/data.json")
+        .then((res) => res.json())
+        .then((data) => {
+            return data
+        })
+        return resp
+}
+const prodFortinet = getDatos()
+console.log(prodFortinet)
+
 //JSON Queres cotizar con los datos del ultimo que cotizo?
 if (localStorage.getItem('datoscliente')){
     const swalWithBootstrapButtons = Swal.mixin({

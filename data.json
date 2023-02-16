@@ -1,0 +1,8 @@
+[
+    {"skuItem":"FG-40F", "skuCosto": 633, "skuDescripcion": "Fortigate 40F"},
+    {"skuItem":"FG-60F", "skuCosto": 888, "skuDescripcion": "Fortigate 60F"},
+    {"skuItem":"FG-100F", "skuCosto": 3568, "skuDescripcion": "Fortigate 100F"},
+    {"skuItem":"FC-10-0040F-950-02-12", "skuCosto": 443, "skuDescripcion": "Soporte UTP para Fortigate 40F"},
+    {"skuItem":"FC-10-0060F-950-02-12", "skuCosto": 621, "skuDescripcion": "Soporte UTP para Fortigate 60F"},
+    {"skuItem":"FC-10-F100F-950-02-12", "skuCosto": 2497, "skuDescripcion": "Soporte UTP para Fortigate 100F"}
+]
