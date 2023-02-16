@@ -33,7 +33,7 @@ let cantidad = document.getElementById("formCantidad");
 
 //fetch con ruta relativa
 const getDatos = async () => {
-    const resp = await fetch("/data.json")
+    const resp = await fetch("../js/data.json")
         .then((res) => res.json())
         .then((data) => {
             return data
